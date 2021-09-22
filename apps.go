@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"runtime"
 	"sync"
 	"time"
 
@@ -47,7 +48,7 @@ func main() {
 		gologger.Info().Str("state", "errored").Str("status", "error").Msg(err.Error())
 		return
 	}
-
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	f, err := os.Open(opts.File)
 	if err != nil {
 		log.Fatal(err)
