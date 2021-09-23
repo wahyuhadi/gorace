@@ -48,7 +48,6 @@ func main() {
 		gologger.Info().Str("state", "errored").Str("status", "error").Msg(err.Error())
 		return
 	}
-	runtime.GOMAXPROCS(runtime.NumCPU())
 	f, err := os.Open(opts.File)
 	if err != nil {
 		log.Fatal(err)
@@ -87,6 +86,7 @@ func main() {
 		}
 	}
 	start := time.Now()
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	var wg sync.WaitGroup
 	ch := make(chan int, int(opts.TotalReq))
 	for i := 0; i < int(opts.TotalReq); i++ {
