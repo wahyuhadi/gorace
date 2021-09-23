@@ -102,12 +102,12 @@ func main() {
 		close(ch)
 	}()
 
-	gologger.Info().Str("state", "sequence").Str("start", start.Format("2006-02-01")).Msg("Start at")
+	gologger.Info().Str("state", "sequence").Str("start", fmt.Sprintf("%v", start)).Msg("Start at")
 
 	for routineNumber := range ch {
 		gologger.Info().Str("state", "sequence").Str("completion sequence number", fmt.Sprintf("%v", routineNumber)).Msg("routine number")
 	}
-	gologger.Info().Str("state", "sequence").Str("finish", fmt.Sprintf("%v", time.Since(start))).Msg("Finish at")
+	gologger.Info().Str("state", "sequence").Str("take time", fmt.Sprintf("%v", time.Since(start))).Msg("Finish at")
 	gologger.Info().Str("state", "success").Str("OK", fmt.Sprintf("%v", ok)).Msg("Expect http status code in responses ")
 
 }
